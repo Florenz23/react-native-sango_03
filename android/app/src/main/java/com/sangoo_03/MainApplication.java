@@ -1,4 +1,4 @@
-package com.pepperoniapptemplate;
+package com.sangoo_03;
 
 import android.app.Application;
 
