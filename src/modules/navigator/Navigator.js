@@ -3,6 +3,7 @@ import {TabNavigator, StackNavigator} from 'react-navigation';
 
 import CounterViewContainer from '../counter/CounterViewContainer';
 import ColorViewContainer from '../colors/ColorViewContainer';
+import ThreadViewContainer from '../threads/ThreadViewContainer';
 
 const headerColor = '#39babd';
 const activeColor = 'white';
@@ -10,7 +11,7 @@ const activeColor = 'white';
 // TabNavigator is nested inside StackNavigator
 export const MainScreenNavigator = TabNavigator({
   Counter: {screen: CounterViewContainer},
-  Color: {screen: ColorViewContainer}
+  Color: {screen: ThreadViewContainer},
 }, {
   tabBarOptions: {
     ...Platform.select({
@@ -37,7 +38,7 @@ MainScreenNavigator.navigationOptions = {
 // Root navigator is a StackNavigator
 const AppNavigator = StackNavigator({
   Home: {screen: MainScreenNavigator},
-  InfiniteColorStack: {screen: ColorViewContainer}
+  InfiniteColorStack: {screen: ThreadViewContainer}
 });
 
 export default AppNavigator;
