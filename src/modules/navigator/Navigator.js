@@ -10,8 +10,8 @@ const activeColor = 'white';
 
 // TabNavigator is nested inside StackNavigator
 export const MainScreenNavigator = TabNavigator({
-  Counter: {screen: CounterViewContainer},
-  Color: {screen: ThreadViewContainer},
+  Counter: {screen: ThreadViewContainer},
+  Color: {screen: ColorViewContainer}
 }, {
   tabBarOptions: {
     ...Platform.select({
@@ -25,7 +25,7 @@ export const MainScreenNavigator = TabNavigator({
 });
 
 MainScreenNavigator.navigationOptions = {
-  title: 'Pepperoni App Template',
+  title: 'Sangoo_03',
   header: {
     titleStyle: {color: 'white'},
     style: {
@@ -38,7 +38,7 @@ MainScreenNavigator.navigationOptions = {
 // Root navigator is a StackNavigator
 const AppNavigator = StackNavigator({
   Home: {screen: MainScreenNavigator},
-  InfiniteColorStack: {screen: ThreadViewContainer}
+  InfiniteColorStack: {screen: ColorViewContainer}
 });
 
 export default AppNavigator;
