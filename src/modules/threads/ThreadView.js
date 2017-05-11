@@ -1,123 +1,159 @@
-
 import React, {PropTypes, Component} from 'react';
-
-import { Button, View, StyleSheet, Text, ScrollView } from 'react-native'
-
-import { posts } from '../../../src/mock/posts'
-import { PostRatingBox, PostAddButton, PostTextBox } from './components'
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Text,
+  View
+} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const color = () => Math.floor(255 * Math.random());
-
-/**
- * Sample view to demonstrate StackNavigator
- * @TODO remove this module in a live application.
- */
-const renderPosts = () => {
-  return posts.map( post => {
-    return (
-        <View style={[styles.container,{backgroundColor:post.bgColor}]} key={post.postId}>
-          <PostTextBox>
-          {post}
-          </PostTextBox>
-          <PostRatingBox style={styles.postRatingContainer}>
-            {post}
-          </PostRatingBox>
-        </View>
-    )
-  })
-}
 class ThreadView extends Component {
   static displayName = 'ThreadView';
 
   static navigationOptions = {
-    title: 'Colors!',
+    title: 'Counter',
     tabBar: () => ({
       icon: (props) => (
-        <Icon name='color-lens' size={24} color={props.tintColor} />
+        <Icon name='plus-one' size={24} color={props.tintColor} />
       )
-    }),
-    // TODO: move this into global config?
-    header: {
-      tintColor: 'white',
-      style: {
-        backgroundColor: '#39babd'
-      }
-    }
+    })
   }
 
-  static propTypes = {
-    navigate: PropTypes.func.isRequired
+
+  increment = () => {
+    this.props.counterStateActions.increment();
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      background: `rgba(${color()},${color()},${color()}, 1)`
-    };
-  }
+  reset = () => {
+    this.props.counterStateActions.reset();
+  };
 
-  open = () => {
-    this.props.navigate({routeName: 'InfiniteColorStack'});
+  random = () => {
+    this.props.counterStateActions.random();
+  };
+
+  bored = () => {
+    this.props.navigate({routeName: 'Color'});
+  };
+
+  renderUserInfo = () => {
+    if (!this.props.userName) {
+      return null;
+    }
+
+    return (
+      <View style={styles.userContainer}>
+        <Image
+          style={styles.userProfilePhoto}
+          source={{
+            uri: this.props.userProfilePhoto,
+            width: 80,
+            height: 80
+          }}
+          />
+        <Text style={styles.linkButton}>
+          Welcome, {this.props.userName}!
+        </Text>
+      </View>
+    );
   };
 
   render() {
-    const buttonText = 'Moin in Stack Navigator';
+    const loadingStyle = this.props.loading
+      ? {backgroundColor: '#eee'}
+      : null;
+
     return (
-    <View>
-    <ScrollView>
-      {renderPosts()}
-    </ScrollView>
-      <PostAddButton />
+      <View style={styles.container}>
+
+        {this.renderUserInfo()}
+
+        <TouchableOpacity
+          accessible={true}
+          accessibilityLabel={'Increment counter'}
+          onPress={this.increment}
+          style={[styles.counterButton, loadingStyle]}>
+          <Text style={styles.counter}>
+            {this.props.counter}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+            accessible={true}
+            accessibilityLabel={'Reset counter'}
+            onPress={this.reset}>
+          <Text style={styles.linkButton}>
+            Reset
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+            accessible={true}
+            accessibilityLabel={'Randomize counter'}
+            onPress={this.random}>
+          <Text style={styles.linkButton}>
+            Random
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.bored} accessible={true}>
+          <Text style={styles.linkButton}>
+            {'I\'m bored!'}
+          </Text>
+        </TouchableOpacity>
+
       </View>
-    )
+    );
   }
 }
 
-const styles1 = StyleSheet.create({
+const circle = {
+  borderWidth: 0,
+  borderRadius: 40,
+  width: 80,
+  height: 80
+};
+
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white'
+  },
+  userContainer: {
+    justifyContent: 'center',
     alignItems: 'center'
-  }
-});
-
-var styles = StyleSheet.create({
-  container: {
-    padding : 15,
-    marginBottom :6,
-    flexDirection : 'row'
   },
-  postTextContainer : {
-    flex : 4
+  userProfilePhoto: {
+    ...circle,
+    alignSelf: 'center'
   },
-  postText : {
-    fontSize: 25,
+  counterButton: {
+    ...circle,
+    backgroundColor: '#349d4a',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 20
+  },
+  counter: {
     color: 'white',
+    fontSize: 20,
+    textAlign: 'center'
   },
-  postRatingContainer : {
-    flex : 1,
-    flexDirection : 'column',
-    justifyContent : 'center',
-    alignItems : 'center'
+  welcome: {
+    textAlign: 'center',
+    color: 'black',
+    marginBottom: 5,
+    padding: 5
   },
-  postRatingButtons : {
-    fontSize : 50,
-    color : '#4F8EF7'
-  },
-  postRatingValue : {
-    fontSize : 30,
-    color : '#4F8EF7'
-  },
-  postReplyContainer : {
-    flexDirection : 'column',
-  },
-  postReplyIcon : {
-    fontSize : 10,
-  },
-  postReplyNumber : {
-    fontSize : 10,
+  linkButton: {
+    textAlign: 'center',
+    color: '#CCCCCC',
+    marginBottom: 10,
+    padding: 5
   }
 });
 
