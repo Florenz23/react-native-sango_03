@@ -17,3 +17,13 @@ export default connect(
     };
   }
 )(ThreadView);
+
+
+// export default connect(
+//   (state) => ({
+//     recievePost: state.app.initialStatePost
+//   }),
+//   (dispatch) => ({
+//     editPost: (dispatchPost) => dispatch(actions.postActionName(dispatchPost)),
+//   })
+// )(App)
