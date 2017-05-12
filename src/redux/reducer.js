@@ -9,6 +9,8 @@ const reducers = {
   // Counter sample app state. This can be removed in a live application
   counter: CounterStateReducer,
 
+  threads : ThreadStateReducer,
+
   // Navigator states
   navigatorState: NavigatorStateReducer,
 

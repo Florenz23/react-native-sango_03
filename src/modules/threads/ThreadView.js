@@ -23,20 +23,9 @@ class ThreadView extends Component {
 
 
   increment = () => {
-    this.props.counterStateActions.increment();
+    this.props.threadStateActions.increment();
   };
 
-  reset = () => {
-    this.props.counterStateActions.reset();
-  };
-
-  random = () => {
-    this.props.counterStateActions.random();
-  };
-
-  bored = () => {
-    this.props.navigate({routeName: 'Color'});
-  };
 
   renderUserInfo = () => {
     if (!this.props.userName) {
@@ -64,11 +53,9 @@ class ThreadView extends Component {
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
       : null;
-
+      console.log(this.props.posts)
     return (
       <View style={styles.container}>
-
-        {this.renderUserInfo()}
 
         <TouchableOpacity
           accessible={true}
@@ -77,30 +64,6 @@ class ThreadView extends Component {
           style={[styles.counterButton, loadingStyle]}>
           <Text style={styles.counter}>
             {this.props.counter}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-            accessible={true}
-            accessibilityLabel={'Reset counter'}
-            onPress={this.reset}>
-          <Text style={styles.linkButton}>
-            Reset
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-            accessible={true}
-            accessibilityLabel={'Randomize counter'}
-            onPress={this.random}>
-          <Text style={styles.linkButton}>
-            Random
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.bored} accessible={true}>
-          <Text style={styles.linkButton}>
-            {'I\'m bored!'}
           </Text>
         </TouchableOpacity>
 

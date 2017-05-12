@@ -7,12 +7,13 @@ import * as ThreadStateActions from '../threads/ThreadState';
 export default connect(
   state => ({
     counter: state.getIn(['counter', 'value']),
-    loading: state.getIn(['counter', 'loading'])
+    loading: state.getIn(['counter', 'loading']),
+    posts: state.getIn(['counter','posts']),
   }),
   dispatch => {
     return {
       navigate: bindActionCreators(NavigationActions.navigate, dispatch),
-      counterStateActions: bindActionCreators(ThreadStateActions, dispatch)
+      threadStateActions: bindActionCreators(ThreadStateActions, dispatch)
     };
   }
 )(ThreadView);
