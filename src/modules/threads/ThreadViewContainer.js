@@ -5,18 +5,14 @@ import {NavigationActions} from 'react-navigation';
 import * as ThreadStateActions from '../threads/ThreadState';
 
 export default connect(
-  state => ({
-    counter: state.getIn(['counter', 'value']),
-    loading: state.getIn(['counter', 'loading']),
-    posts: state.getIn(['counter','posts']),
+  (state) => ({
+    posts: state.get('threads'),
   }),
-  dispatch => {
-    return {
-      navigate: bindActionCreators(NavigationActions.navigate, dispatch),
-      threadStateActions: bindActionCreators(ThreadStateActions, dispatch)
-    };
-  }
-)(ThreadView);
+  (dispatch) => ({
+      navigate: () => dispatch(NavigationActions.navigate()),
+      threadStateActions: () => dispatch(ThreadStateActions()),
+    })
+)(ThreadView)
 
 
 // export default connect(

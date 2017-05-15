@@ -4,13 +4,10 @@ import {generateRandomNumber} from '../../services/randomNumberService';
 
 import {posts} from '../../mock/posts'
 
-console.log(posts)
 
 // Initial state
 const initialState = Map({
-  value: 5,
-  loading: false,
-  posts: posts
+  posts: posts,
 });
 
 // Actions

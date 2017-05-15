@@ -5,7 +5,8 @@ import {generateRandomNumber} from '../../services/randomNumberService';
 // Initial state
 const initialState = Map({
   value: 2,
-  loading: false
+  loading: false,
+  posts: "moin"
 });
 
 // Actions
